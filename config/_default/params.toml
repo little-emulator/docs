@@ -1,6 +1,12 @@
+displayUpdatedDate = true
+dateFormat = "January 2, 2006"
+
+[theme]
+  default = "light"
+
 [editUrl]
   enable = true
-  base = "https://github.com/little-emulator/docs/edit/main"
+  base = "https://github.com/little-emulator/docs/edit/main/content"
 
 [page]
   width = "wide"
