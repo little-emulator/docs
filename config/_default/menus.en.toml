@@ -1,0 +1,15 @@
+[[main]]
+name = "Docs"
+pageRef = "/docs"
+weight = 1
+
+[[main]]
+name = "Search"
+weight = 2
+params.type = "search"
+
+[[main]]
+name = "GitHub"
+weight = 3
+url = "https://github.com/little-emulator"
+params.icon = "github"

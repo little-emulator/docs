@@ -1,0 +1,20 @@
+[editUrl]
+  enable = true
+  base = "https://github.com/little-emulator/docs/edit/main"
+
+[page]
+  width = "wide"
+
+[search.flexsearch]
+  index = "content"
+  tokenize = "full"
+
+[comments]
+  enable = true
+  type = "giscus"
+
+  [comments.giscus]
+    repo = "little-emulator/docs"
+    repoId = "R_kgDOMmZZgw"
+    category = "Q&A"
+    categoryId = "DIC_kwDOMmZZg84CiOH9"
