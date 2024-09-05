@@ -1,0 +1,32 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    container: docker.io/alpine:3.20
+    steps:
+      - name: Install the dependencies
+        run: |
+          apk update &&
+          apk add hugo git npm &&
+          npm install -g wrangler                              
+
+      - name: Checkout the code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build the docs
+        run: hugo --gc
+
+      - name: Upload the files to Cloudflare Pages
+        run: npx wrangler pages deploy $DIRECTORY --project-name=$PROJECT_NAME
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PROJECT_NAME: little-emulator
+          DIRECTORY: public
