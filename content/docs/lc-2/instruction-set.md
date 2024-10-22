@@ -261,10 +261,14 @@ In this page are listed all of the instructions.[^3]
   set_condition_codes(DR);
   ```
   
-  # TODO
+  Load the register specified by `DR` in this way: load the cell pointed by
+  `pgoffset9` and use it as a pointer to the actual value to be loaded.
+  
+  The condition codes are set, based on whether the result is negative, zero,
+  or positive.
   
   ```asm { filename = "Example" }
-  
+  LD R4, pointer    ; Use the value pointed by the "pointer" as an address and put the content of the cell into R4
   ```
 
 {{% /details %}}
@@ -284,10 +288,16 @@ In this page are listed all of the instructions.[^3]
   set_condition_codes(DR);
   ```
   
-  # TODO
+  Load the register specified by `DR` with the word from the main memory
+  pointed by the content of the register `BaseR` plus the
+  [zero-extension](https://en.wikipedia.org/wiki/Sign_extension#Zero_extension)
+  of `index6`.
+  
+  The condition codes are set, based on whether the result is negative, zero,
+  or positive.
   
   ```asm { filename = "Example" }
-  
+  LDR R4, R2, #10    ; Load the value pointed by the address stored in R2 + 10 into R4
   ```
 
 {{% /details %}}
@@ -307,10 +317,14 @@ In this page are listed all of the instructions.[^3]
   set_condition_codes(DR);
   ```
   
-  # TODO
+  Load the register specified by `DR` with the address formed by concetenating
+  the top seven bits of the program counter with the `pgoffset9`.
+  
+  The condition codes are set, based on whether the result is negative, zero, or
+  positive.
   
   ```asm { filename = "Example" }
-  
+  LEA R4, foo    ; Load the address of the "foo" label into R4
   ```
 
 {{% /details %}}
@@ -381,7 +395,8 @@ In this page are listed all of the instructions.[^3]
   R6 = R6 - 1;
   ```
   
-  # TODO
+  Pop the top two elements off the stack. Load the first one into the condition
+  codes, and the second one into the program counter.
   
   {{< callout type="info" >}}
   For more information check the "[Interrupts](../interrupts)" chapter.
@@ -430,7 +445,12 @@ In this page are listed all of the instructions.[^3]
   memory[memory[PC[15:9] @ pgoffset9]] = SR;
   ```
   
-  # TODO
+  Store the content of the register specified by `SR` in this way: load the
+  cell pointed by `pgoffset9` and use it as a pointer to the actual cell to be
+  stored.
+  
+  The condition codes are set, based on whether the result is negative, zero,
+  or positive.
   
   ```asm { filename = "Example" }
   
@@ -452,7 +472,13 @@ In this page are listed all of the instructions.[^3]
   memory[BaseR + zero_extend(index6)] = SR;
   ```
   
-  # TODO
+  Store the content of the register specified by `SR` with the word from the
+  main memory pointed by the content of the register `BaseR` plus the
+  [zero-extension](https://en.wikipedia.org/wiki/Sign_extension#Zero_extension)
+  of `index6`.
+  
+  The condition codes are set, based on whether the result is negative, zero,
+  or positive.
   
   ```asm { filename = "Example" }
   
@@ -475,7 +501,9 @@ In this page are listed all of the instructions.[^3]
   PC = memory[zero_extend(trapvec8)];
   ```
   
-  # TODO
+  Load the program counter with the content of the main memory pointed by the
+  [zero-extension](https://en.wikipedia.org/wiki/Sign_extension#Zero_extension)
+  of `trapvec8`.
   
   {{< callout type="info" >}}
   For more information check the "[Trap](../trap)" chapter.
