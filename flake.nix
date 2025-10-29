@@ -14,6 +14,10 @@
         # Packages to install
         buildInputs = [
           pkgs.hugo
+
+          # Favicon generation
+          pkgs.imagemagick
+          pkgs.xmlstarlet
         ];
       };
     });

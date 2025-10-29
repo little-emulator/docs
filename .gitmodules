@@ -1,3 +1,6 @@
 [submodule "themes/hextra"]
 	path = themes/hextra
 	url = https://github.com/imfing/hextra.git
+[submodule "favicon/artwork"]
+	path = favicon/artwork
+	url = https://git.nicolabelluti.me/little-emulator/artwork
