@@ -10,3 +10,26 @@
 [![GitHub Stars](https://img.shields.io/github/stars/little-emulator?style=flat&logo=github&label=GitHub%20Stargazers&cacheSeconds=3600)](https://github.com/little-emulator)
 
 </div><br>
+
+> Some documentation for the [Little Emulator](https://little-emulator.org/)
+> project, powered by [Hugo](https://gohugo.io/) and the
+> [Hextra](https://imfing.github.io/hextra/) theme
+
+## Usage
+
+This project uses [Nix](https://nixos.org/) to create a reproducible development workspace
+
+```sh
+# Clone the repository
+git clone --recurse-submodules --shallow-submodules https://git.nicolabelluti.me/little-emulator/docs.git
+cd docs
+
+# Enter the dev workspace
+nix develop -c $SHELL
+
+# Build the website
+make
+
+# Start the development webserver
+make dev-server
+```
