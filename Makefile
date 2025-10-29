@@ -3,7 +3,7 @@ all: build
 build: clean generate-favicons
 	@hugo --gc
 
-serve:
+dev-server:
 	@if ! ls static/android-chrome* static/apple* static/favicon* static/site.webmanifest >/dev/null 2>&1; then \
 		echo -e '\033[1;31mSome favicon or manifest files are missing!\033[0m'; \
 		echo 'Run "make generate-favicons" to generate them'; \
