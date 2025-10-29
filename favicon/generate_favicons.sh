@@ -42,9 +42,9 @@ ICO_SIZES=(16 32 48)
 
 # ============================= Pre-flight checks ==============================
 
-[[ -f "${SRC_SVG}" ]] || { echo "\033[1;31mError: Source SVG not found: ${SRC_SVG}\033[0m" >&2; exit 1; }
-command -v magick >/dev/null     || { echo "\033[1;31mError: ImageMagick (magick) not found\033[0m" >&2; exit 1; }
-command -v xmlstarlet >/dev/null || { echo "\033[1;31mError: xmlstarlet required for SVG cropping\033[0m" >&2; exit 1; }
+[[ -f "${SRC_SVG}" ]] || { echo -e "\033[1;31mError: Source SVG not found: ${SRC_SVG}\033[0m" >&2; exit 1; }
+command -v magick >/dev/null     || { echo -e "\033[1;31mError: ImageMagick (magick) not found\033[0m" >&2; exit 1; }
+command -v xmlstarlet >/dev/null || { echo -e "\033[1;31mError: xmlstarlet required for SVG cropping\033[0m" >&2; exit 1; }
 
 # ================================= Functions ==================================
 
