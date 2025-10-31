@@ -1,0 +1,30 @@
+# [[main]]
+#   name = "Learn"
+#   weight = 1
+#   pageRef = "/learn"
+
+# [[main]]
+#   name = "ISA Documentation"
+#   weight = 2
+#   pageRef = "/isa-docs"
+
+# [[main]]
+#   name = "Software Documentation"
+#   weight = 3
+#   pageRef = "/docs"
+
+[[main]]
+  name = "Search"
+  weight = 4
+  params.type = "search"
+
+[[main]]
+  name = "GitHub"
+  weight = 5
+  url = "https://github.com/little-emulator"
+  params.icon = "github"
+
+[[main]]
+  name = "Theme Toggle"
+  weight = 6
+  params.type = "theme-toggle"

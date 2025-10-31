@@ -1,5 +1,13 @@
-baseURL = 'https://little-emulator.org/'
-languageCode = 'en'
-title = 'Little Emulator'
+baseURL = "https://little-emulator.org/"
+languageCode = "en"
+title = "Little Emulator"
 
 theme = "hextra"
+
+enableGitInfo = true
+
+[outputs]
+  home = [
+    "html",
+    "llms",
+  ]

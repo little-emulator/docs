@@ -1,0 +1,42 @@
+description = "Some documentation for the Little Emulator project"
+
+externalLinkDecoration = true
+
+displayUpdatedDate = true
+dateFormat = "January 2, 2006"
+
+[banner]
+  key = "wip"
+  message = "🚧 **Work in Progress!** 🚧"
+
+[navbar]
+  displayTitle = true
+  displayLogo = true
+  width = "wide"
+
+  [navbar.logo]
+    path = "/favicon.svg"
+    dark = "/favicon-dark.svg"
+    link = "/"
+    width = '40'
+
+[footer]
+  displayCopyright = true
+  displayPoweredBy = false
+
+[editUrl]
+  enable = true
+  base = "https://github.com/little-emulator/docs/edit/main/content"
+
+[page]
+  width = "wide"
+
+[comments]
+  enable = true
+  type = "giscus"
+
+  [comments.giscus]
+    repo = "little-emulator/docs"
+    repoId = "R_kgDONlBPOg"
+    category = "Q&A"
+    categoryId = "DIC_kwDONlBPOs4ClrYh"
