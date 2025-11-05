@@ -23,9 +23,11 @@ APP_NAME="Little Emulator"
 THEME_COLOR="#000000"
 BACKGROUND_COLOR="#000000"
 
-# Dark variant color swap (case-insensitive)
-COLOR_A="#36373b"
-COLOR_B="#fafcfc"
+# Color swap map for dark SVG generation
+COLOR_SWAP_MAP=(
+  "36373b fafcfc"
+  "fafcfc 000000"
+)
 
 # Raster outputs
 #  size       file_name       background
@@ -98,6 +100,38 @@ crop_svg_viewbox() {
 }
 
 ##############################################
+# swap_svg_colors <input.svg> <output.svg> <"SRC DEST"...>
+# Performs case-insensitive hex color swaps using two-pass placeholders
+##############################################
+swap_svg_colors() {
+  local INPUT_FILE="$1"
+  local OUTPUT_FILE="$2"
+  shift 2
+  local MAP_ITEMS=("$@")
+
+  if (( ${#MAP_ITEMS[@]} == 0 )); then
+    cp -- "$INPUT_FILE" "$OUTPUT_FILE"
+    return
+  fi
+
+  local SED_ARGS_PRE=()
+  local SED_ARGS_POST=()
+  local I=0 SRC DEST PLACEHOLDER
+
+  for pair in "${MAP_ITEMS[@]}"; do
+    read -r SRC DEST <<<"$pair"
+    SRC="${SRC#\#}"
+    DEST="${DEST#\#}"
+    PLACEHOLDER="__TMP_COLOR_${I}__"
+    SED_ARGS_PRE+=(-e "s/#?${SRC}\\b/${PLACEHOLDER}/Ig")
+    SED_ARGS_POST+=(-e "s/${PLACEHOLDER}/#${DEST}/g")
+    I=$((I+1))
+  done
+
+  sed -E "${SED_ARGS_PRE[@]}" -- "$INPUT_FILE" | sed -E "${SED_ARGS_POST[@]}" -- > "$OUTPUT_FILE"
+}
+
+##############################################
 # render_png <width> <height> <out_path> <background|'none'>
 ##############################################
 render_png() {
@@ -113,16 +147,12 @@ render_png() {
 
 mkdir -p "${OUTPUT_DIR}"
 
-echo "▶️  Cropping SVG to centered ${CROP_SIZE}x${CROP_SIZE} viewBox…"
+echo "▶️  Cropping SVG to centered ${CROP_SIZE}x${CROP_SIZE} viewBox..."
 crop_svg_viewbox "${SRC_SVG}" "${OUTPUT_DIR}/favicon.svg" "${CROP_SIZE}"
 echo "✅ Cropped vector saved: favicon.svg"
 
-echo "▶️  Creating dark SVG variant by swapping ${COLOR_A} and ${COLOR_B}..."
-sed -E \
-    -e "s/${COLOR_A//\#/\\#}/__TMP_COLOR__/Ig" \
-    -e "s/${COLOR_B//\#/\\#}/${COLOR_A//\#/\\#}/Ig" \
-    -e "s/__TMP_COLOR__/${COLOR_B//\#/\\#}/Ig" \
-    "${OUTPUT_DIR}/favicon.svg" > "${OUTPUT_DIR}/favicon-dark.svg"
+echo "▶️  Creating dark SVG variant..."
+swap_svg_colors "${OUTPUT_DIR}/favicon.svg" "${OUTPUT_DIR}/favicon-dark.svg" "${COLOR_SWAP_MAP[@]}"
 echo "✅ Dark variant saved: favicon-dark.svg"
 
 echo "▶️  Rendering PNG assets..."
