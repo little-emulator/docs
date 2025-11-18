@@ -1,17 +1,17 @@
-# [[main]]
-#   name = "Learn"
-#   weight = 1
-#   pageRef = "/learn"
+[[main]]
+  name = "🚧 Learn"
+  weight = 1
+  pageRef = "#"
 
-# [[main]]
-#   name = "ISA Documentation"
-#   weight = 2
-#   pageRef = "/isa-docs"
+[[main]]
+  name = "🚧 ISA Documentation"
+  weight = 2
+  pageRef = "#"
 
-# [[main]]
-#   name = "Software Documentation"
-#   weight = 3
-#   pageRef = "/docs"
+[[main]]
+  name = "🚧 Software Documentation"
+  weight = 3
+  pageRef = "#"
 
 [[main]]
   name = "Search"

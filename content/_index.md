@@ -20,7 +20,7 @@ layout = "wide"
 {{< /hextra/hero-section >}}
 </div>
 
-<div class="hx:mb-12">
+<div class="hx:mb-6">
 {{< hextra/hero-subtitle >}}
   An open-source learning suite that reveals how complexity arises from
   simplicity.
@@ -30,8 +30,13 @@ layout = "wide"
 {{< /hextra/hero-subtitle >}}
 </div>
 
-<div class="hx:mb-6">
-{{< hextra/hero-button text="Get Started" link="docs" >}}
-</div>
+{{< hextra/hero-button    text="🚧 Learn"                  link="#" style="margin: calc(var(--hx-spacing)*2)" >}}
+{{< hero-button-secondary text="🚧 ISA Documentation"      link="#" style="margin: calc(var(--hx-spacing)*2)" >}}
+{{< hero-button-secondary text="🚧 Software Documentation" link="#" style="margin: calc(var(--hx-spacing)*2)" >}}
+
+<div class="hx:mb-12">&nbsp;</div>
 
 {{< /hextra/hero-container >}}
+
+<div class="hx:mx-auto hx:mb-12" style="max-width: min(70rem, var(--hextra-max-page-width))">
+</div>
