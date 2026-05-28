@@ -31,6 +31,9 @@ dateFormat = "January 2, 2006"
 [page]
   width = "wide"
 
+[imageZoom]
+  enable = true
+
 [comments]
   enable = true
   type = "giscus"
