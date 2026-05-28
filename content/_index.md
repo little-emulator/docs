@@ -30,9 +30,9 @@ layout = "wide"
 {{< /hextra/hero-subtitle >}}
 </div>
 
-{{< hextra/hero-button    text="🚧 Learn"                  link="#" style="margin: calc(var(--hx-spacing)*2)" >}}
-{{< hero-button-secondary text="🚧 ISA Documentation"      link="#" style="margin: calc(var(--hx-spacing)*2)" >}}
-{{< hero-button-secondary text="🚧 Software Documentation" link="#" style="margin: calc(var(--hx-spacing)*2)" >}}
+{{< hextra/hero-button    text="🚧 Learn"                  link="#"         style="margin: calc(var(--hx-spacing)*2)" >}}
+{{< hero-button-secondary text="🚧 ISA Documentation"      link="/isa-docs" style="margin: calc(var(--hx-spacing)*2)" >}}
+{{< hero-button-secondary text="🚧 Software Documentation" link="#"         style="margin: calc(var(--hx-spacing)*2)" >}}
 
 <div class="hx:mb-12">&nbsp;</div>
 

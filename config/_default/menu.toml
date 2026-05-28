@@ -6,7 +6,7 @@
 [[main]]
   name = "🚧 ISA Documentation"
   weight = 2
-  pageRef = "#"
+  pageRef = "/isa-docs"
 
 [[main]]
   name = "🚧 Software Documentation"
