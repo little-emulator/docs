@@ -1,0 +1,46 @@
+{{- /*
+cite-web - Chicago Notes style web citation shortcode.
+Renders a fully formatted Chicago Notes citation for a web resource, with
+optional author, site name, publication date, access date, archived URL and
+archived date. All fields are optional except title and url.
+
+@param {string} author             Author(s) in "Lastname, Firstname" format.
+@param {string} title              Page title (rendered in quotes).
+@param {string} site               Website or organization name.
+@param {string} date               Publication or last updated date.
+@param {string} url                URL of the resource (required).
+@param {string} format             File format of the resource, if applicable (e.g. "PDF", "DOC").
+@param {string} accessed           Date the page was accessed.
+@param {string} url-archived       Archived version URL (e.g. Wayback Machine).
+@param {string} url-archived-date  Date of archival (e.g. "June 15, 2017").
+
+@example {{< cite-web
+  author="Patt, Yale N."
+  title="The LC-3b ISA"
+  site="University of Texas"
+  date="May 22, 2021"
+  url="https://users.ece.utexas.edu/~patt/21s.460n/handouts/appA.pdf"
+  format="PDF"
+  accessed="May 29, 2026"
+  url-archived="https://web.archive.org/web/20250327170520/https://users.ece.utexas.edu/~patt/21s.460n/handouts/appA.pdf"
+  url-archived-date="March 27, 2025"
+>}}
+*/ -}}
+
+{{- $author          := .Get "author" -}}
+{{- $title           := .Get "title" -}}
+{{- $site            := .Get "site" -}}
+{{- $date            := .Get "date" -}}
+{{- $url             := .Get "url" -}}
+{{- $format          := .Get "format" -}}
+{{- $accessed        := .Get "accessed" -}}
+{{- $urlArchived     := .Get "url-archived" -}}
+{{- $urlArchivedDate := .Get "url-archived-date" -}}
+
+{{- if $author }}{{ $author }}. {{ end -}}
+{{- if $title }}"{{ $title }}."{{ end -}}
+{{- if $site }} {{ $site }}.{{ end -}}
+{{- if $date }} {{ $date }}.{{ end -}}
+{{- if $url }} <a href="{{ $url }}" target="_blank">{{ $url }}</a>{{ with $format }} ({{ . }}){{ end }}.{{ end -}}
+{{- if $accessed }} Accessed {{ $accessed }}.{{ end -}}
+{{- if $urlArchived }} (<a href="{{ $urlArchived }}" target="_blank">Archived{{ with $urlArchivedDate }} on {{ . }}{{ end }}</a>){{ end -}}
