@@ -1,0 +1,24 @@
+{{- $author          := .author -}}
+{{- $chapter         := .chapter -}}
+{{- $title           := .title -}}
+{{- $editor          := .editor -}}
+{{- $edition         := .edition -}}
+{{- $publisher       := .publisher -}}
+{{- $year            := .year -}}
+{{- $page            := .page -}}
+{{- $pageEnd         := .pageEnd -}}
+{{- $isbn            := .isbn -}}
+{{- $url             := .url -}}
+{{- $urlArchived     := .urlArchived -}}
+{{- $urlArchivedDate := .urlArchivedDate -}}
+
+{{- if $author }}{{ $author }}, {{ end -}}
+{{- if $chapter }}"{{ $chapter }}" in {{ end -}}
+{{- if $title }}<em>{{ $title }}</em>{{ end -}}
+{{- if $editor }}, ed. {{ $editor }}{{ end -}}
+{{- if $edition }}, {{ $edition }} {{ if $editor }}edn.{{ else }}ed.{{ end }}{{ end -}}
+{{- if or $publisher $year }} ({{ $publisher }}{{ if and $publisher $year }}, {{ end }}{{ $year }}){{ end -}}
+{{- if $page }}, {{ if $pageEnd }}pp. {{ $page }}-{{ $pageEnd }}{{ else }}p. {{ $page }}{{ end }}{{ end -}}
+{{- if $isbn }}. <a href="https://en.wikipedia.org/wiki/Special:BookSources/{{ $isbn }}" target="_blank">ISBN {{ $isbn }}</a>{{ end -}}
+{{- if $url }}. <a href="{{ $url }}" target="_blank">Link</a>{{ end -}}
+{{- if $urlArchived }} (<a href="{{ $urlArchived }}" target="_blank">Archived{{ with $urlArchivedDate }} on {{ . }}{{ end }}</a>){{ end -}}

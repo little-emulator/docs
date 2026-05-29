@@ -28,34 +28,25 @@ author and title.
   year="2001"
   page="429"
   page-end="449"
-  isbn="0072376902"
+  isbn="978-0072376906"
   url="http://www.mhhe.com/patt"
   url-archived="https://web.archive.org/web/20170615060857/http://www.mhhe.com/engcs/compsci/patt/"
   url-archived-date="June 15, 2017"
 >}}
 */ -}}
 
-{{- $author          := .Get "author" -}}
-{{- $chapter         := .Get "chapter" -}}
-{{- $title           := .Get "title" -}}
-{{- $editor          := .Get "editor" -}}
-{{- $edition         := .Get "edition" -}}
-{{- $publisher       := .Get "publisher" -}}
-{{- $year            := .Get "year" -}}
-{{- $page            := .Get "page" -}}
-{{- $pageEnd         := .Get "page-end" -}}
-{{- $isbn            := .Get "isbn" -}}
-{{- $url             := .Get "url" -}}
-{{- $urlArchived     := .Get "url-archived" -}}
-{{- $urlArchivedDate := .Get "url-archived-date" -}}
-
-{{- if $author }}{{ $author }}, {{ end -}}
-{{- if $chapter }}"{{ $chapter }}" in {{ end -}}
-{{- if $title }}<em>{{ $title }}</em>{{ end -}}
-{{- if $editor }}, ed. {{ $editor }}{{ end -}}
-{{- if $edition }}, {{ $edition }} {{ if $editor }}edn.{{ else }}ed.{{ end }}{{ end -}}
-{{- if or $publisher $year }} ({{ $publisher }}{{ if and $publisher $year }}, {{ end }}{{ $year }}){{ end -}}
-{{- if $page }}, {{ if $pageEnd }}pp. {{ $page }}-{{ $pageEnd }}{{ else }}p. {{ $page }}{{ end }}{{ end -}}
-{{- if $isbn }}. <a href="https://en.wikipedia.org/wiki/Special:BookSources/{{ $isbn }}" target="_blank">ISBN {{ $isbn }}</a>{{ end -}}
-{{- if $url }}. <a href="{{ $url }}" target="_blank">Link</a>{{ end -}}
-{{- if $urlArchived }} (<a href="{{ $urlArchived }}" target="_blank">Archived{{ with $urlArchivedDate }} on {{ . }}{{ end }}</a>){{ end -}}
+{{ partial "cite-book.html" (dict
+  "author"           (.Get "author")
+  "chapter"          (.Get "chapter")
+  "title"            (.Get "title")
+  "editor"           (.Get "editor")
+  "edition"          (.Get "edition")
+  "publisher"        (.Get "publisher")
+  "year"             (.Get "year")
+  "page"             (.Get "page")
+  "pageEnd"          (.Get "page-end")
+  "isbn"             (.Get "isbn")
+  "url"              (.Get "url")
+  "urlArchived"      (.Get "url-archived")
+  "urlArchivedDate"  (.Get "url-archived-date")
+) }}

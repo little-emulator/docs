@@ -1,0 +1,73 @@
+{{- /*
+cite-ics - Shortcode for citing Introduction to Computing Systems by Patt & Patel.
+Pre-fills author, title, publisher, year, ISBN, and URLs based on the edition.
+
+@param {string} edition   Edition of the book ("1", "2", or "3").
+@param {string} chapter   Chapter title.
+@param {string} page      Page number (single) or start of range.
+@param {string} page-end  End of page range (if citing multiple pages).
+
+@example {{< cite-ics edition="1" chapter="Appendix A: The LC-2 ISA" page="429" page-end="449" >}}
+*/ -}}
+
+{{- $edition := .Get "edition" -}}
+{{- $chapter := .Get "chapter" -}}
+{{- $page    := .Get "page" -}}
+{{- $pageEnd := .Get "page-end" -}}
+
+{{- $author    := "Patt, Yale N. and Patel, Sanjay J." -}}
+{{- $publisher := "McGraw-Hill" -}}
+
+{{- $editionString   := "" -}}
+{{- $title           := "" -}}
+{{- $year            := "" -}}
+{{- $isbn            := "" -}}
+{{- $url             := "" -}}
+{{- $urlArchived     := "" -}}
+{{- $urlArchivedDate := "" -}}
+
+{{- if eq $edition "1" -}}
+  {{- $editionString   = "1st" -}}
+
+  {{- $title           = "Introduction to Computing Systems: from Bits and Gates to C and Beyond" -}}
+  {{- $year            = "2001" -}}
+  {{- $isbn            = "978-0072376906" -}}
+  {{- $url             = "http://www.mhhe.com/patt" -}}
+  {{- $urlArchived     = "https://web.archive.org/web/20170615060857/http://www.mhhe.com/engcs/compsci/patt/" -}}
+  {{- $urlArchivedDate = "June 15, 2017" -}}
+{{- else if eq $edition "2" -}}
+  {{- $editionString   = "2nd" -}}
+
+  {{- /* https://icourse.club/uploads/files/647434676ec33b68392bf82c3a014751e8e2345a.pdf */ -}}
+
+  {{- $title           = "Introduction to Computing Systems: from Bits and Gates to C and Beyond" -}}
+  {{- $year            = "2004" -}}
+  {{- $isbn            = "978-0071245012" -}}
+  {{- $url             = "http://www.mhhe.com/patt2" -}}
+{{- else if eq $edition "3" -}}
+  {{- $editionString   = "3rd" -}}
+
+  {{- /* https://icourse.club/uploads/files/96a2b94d4be48285f2605d843a1e6db37da9a944.pdf */ -}}
+
+  {{- $title           = "Introduction to Computing Systems: from Bits and Gates to C/C++ and Beyond" -}}
+  {{- $year            = "2020" -}}
+  {{- $isbn            = "978-1260150537" -}}
+  {{- $url             = "http://www.mhhe.com/patt3" -}}
+{{- else -}}
+  {{ errorf "cite-ics: edition must be 1, 2, or 3, got '%s'" $edition }}
+{{- end -}}
+
+{{ partial "cite-book.html" (dict
+  "author"          $author
+  "title"           $title
+  "chapter"         $chapter
+  "edition"         $editionString
+  "publisher"       $publisher
+  "year"            $year
+  "page"            $page
+  "pageEnd"         $pageEnd
+  "isbn"            $isbn
+  "url"             $url
+  "urlArchived"     $urlArchived
+  "urlArchivedDate" $urlArchivedDate
+) }}
