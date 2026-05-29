@@ -1,0 +1,61 @@
+{{- /*
+cite-book - Chicago Notes style book citation shortcode.
+Renders a fully formatted Chicago Notes citation for a book, with optional
+chapter, editor, edition, publisher, page range, ISBN (linked to Wikipedia
+BookSources), original URL, and archived URL. All fields are optional except
+author and title.
+
+@param {string} author             Author(s) in "Lastname, Firstname" format.
+@param {string} chapter            Chapter title, if citing a specific chapter.
+@param {string} title              Book title (rendered in italics).
+@param {string} editor             Editor(s) of the volume, if applicable.
+@param {string} edition            Edition (e.g. "3rd", "2nd").
+@param {string} publisher          Publisher name.
+@param {string} year               Publication year.
+@param {string} page               Page number (single) or start of range.
+@param {string} page-end           End of page range (if citing multiple pages).
+@param {string} isbn               ISBN (linked to Wikipedia BookSources).
+@param {string} url                Original URL of the resource.
+@param {string} url-archived       Archived version URL (e.g. Wayback Machine).
+@param {string} url-archived-date  Date of archival (e.g. "2024-01-15").
+
+@example {{< cite-book
+  author="Patt, Yale N. and Patel, Sanjay J."
+  chapter="Appendix A: The LC-2 ISA"
+  title="Introduction to Computing Systems: from Bits and Gates to C and Beyond"
+  edition="1st"
+  publisher="McGraw-Hill"
+  year="2001"
+  page="429"
+  page-end="449"
+  isbn="0072376902"
+  url="http://www.mhhe.com/patt"
+  url-archived="https://web.archive.org/web/20170615060857/http://www.mhhe.com/engcs/compsci/patt/"
+  url-archived-date="June 15, 2017"
+>}}
+*/ -}}
+
+{{- $author          := .Get "author" -}}
+{{- $chapter         := .Get "chapter" -}}
+{{- $title           := .Get "title" -}}
+{{- $editor          := .Get "editor" -}}
+{{- $edition         := .Get "edition" -}}
+{{- $publisher       := .Get "publisher" -}}
+{{- $year            := .Get "year" -}}
+{{- $page            := .Get "page" -}}
+{{- $pageEnd         := .Get "page-end" -}}
+{{- $isbn            := .Get "isbn" -}}
+{{- $url             := .Get "url" -}}
+{{- $urlArchived     := .Get "url-archived" -}}
+{{- $urlArchivedDate := .Get "url-archived-date" -}}
+
+{{- if $author }}{{ $author }}, {{ end -}}
+{{- if $chapter }}"{{ $chapter }}" in {{ end -}}
+{{- if $title }}<em>{{ $title }}</em>{{ end -}}
+{{- if $editor }}, ed. {{ $editor }}{{ end -}}
+{{- if $edition }}, {{ $edition }} {{ if $editor }}edn.{{ else }}ed.{{ end }}{{ end -}}
+{{- if or $publisher $year }} ({{ $publisher }}{{ if and $publisher $year }}, {{ end }}{{ $year }}){{ end -}}
+{{- if $page }}, {{ if $pageEnd }}pp. {{ $page }}-{{ $pageEnd }}{{ else }}p. {{ $page }}{{ end }}{{ end -}}
+{{- if $isbn }}. <a href="https://en.wikipedia.org/wiki/Special:BookSources/{{ $isbn }}" target="_blank">ISBN {{ $isbn }}</a>{{ end -}}
+{{- if $url }}. <a href="{{ $url }}" target="_blank">Link</a>{{ end -}}
+{{- if $urlArchived }} (<a href="{{ $urlArchived }}" target="_blank">Archived{{ with $urlArchivedDate }} on {{ . }}{{ end }}</a>){{ end -}}
