@@ -1,0 +1,59 @@
+{{- /*
+cite-talk - Chicago Notes style conference presentation citation shortcode.
+Renders a fully formatted Chicago Notes citation for a conference talk,
+keynote, poster, or similar presentation.
+
+@param {string} author             Author(s) in "Lastname, Firstname" format.
+@param {string} title              Presentation title (rendered in quotes).
+@param {string} type               Type of presentation (e.g. "Keynote", "Paper", "Poster", "PowerPoint").
+@param {string} event              Conference or event name.
+@param {string} location           City and state/country of the event.
+@param {string} date               Date or month/year of the event.
+@param {string} url                URL of the resource (required if online).
+@param {string} format             File format, if applicable (e.g. "PDF", "PowerPoint").
+@param {string} accessed           Date the resource was accessed.
+@param {string} url-archived       Archived version URL (e.g. Wayback Machine).
+@param {string} url-archived-date  Date of archival (e.g. "June 15, 2017").
+
+@example {{< cite-talk
+  author="Patt, Yale N."
+  title="LC-3, x86, or MIPS: The First ISA for Students to Study"
+  type="Keynote"
+  event="Workshop on Computer Architecture Education"
+  location="San Diego, CA"
+  date="June 9, 2007"
+  url="https://www.csc2.ncsu.edu/faculty/efg/wcae/ISCA2007/FinalProgram.html"
+  format="PowerPoint presentation"
+  accessed="June 8, 2026"
+  url-archived="https://web.archive.org/web/20250129103001/https://www.csc2.ncsu.edu/faculty/efg/wcae/ISCA2007/FinalProgram.html"
+  url-archived-date="January 29, 2025"
+>}}
+*/ -}}
+
+{{- $author          := .Get "author" -}}
+{{- $title           := .Get "title" -}}
+{{- $type            := .Get "type" -}}
+{{- $event           := .Get "event" -}}
+{{- $location        := .Get "location" -}}
+{{- $date            := .Get "date" -}}
+{{- $url             := .Get "url" -}}
+{{- $format          := .Get "format" -}}
+{{- $accessed        := .Get "accessed" -}}
+{{- $urlArchived     := .Get "url-archived" -}}
+{{- $urlArchivedDate := .Get "url-archived-date" -}}
+
+{{- if $author }}{{ $author }}. {{ end -}}
+{{- if $title }}"{{ $title }}"{{ end -}}
+{{- if or $type $event $location $date }} (
+  {{- $type }}
+  {{- if and $type $event }} presentation at {{ end }}
+  {{- if and (not $type) $event }}Presentation at {{ end }}
+  {{- $event }}
+  {{- if and $event $location }}, {{ end }}
+  {{- $location }}
+  {{- if and (or $event $location) $date }}, {{ end }}
+  {{- $date }}).
+{{- end -}}
+{{- if $url }} <a href="{{ $url }}" target="_blank">{{ $url }}</a>{{ with $format }} ({{ . }}){{ end }}.{{ end -}}
+{{- if $accessed }} Accessed {{ $accessed }}.{{ end -}}
+{{- if $urlArchived }} (<a href="{{ $urlArchived }}" target="_blank">Archived{{ with $urlArchivedDate }} on {{ . }}{{ end }}</a>){{ end -}}
