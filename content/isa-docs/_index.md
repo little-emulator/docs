@@ -1,9 +1,7 @@
 +++
 title = "ISA Documentation"
 
-comments = false
 breadcrumbs = false
-
 cascade.type = "docs"
 +++
 
