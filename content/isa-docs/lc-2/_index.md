@@ -98,11 +98,25 @@ implicitly read by conditional branch instructions.
 
   [^lc2-condition-codes]: {{< cite-ics edition="1" chapter="5.1.7 Condition Codes" page="95" >}}
 
+## Startup Behavior
+
+The ISA does not specify a default starting address or reset vector. Where the
+PC is initialized when the processor powers on or resets is left entirely to
+the implementation. {{< citation-needed >}}
+
 ## Interrupt Support
 
-LC-2 provides basic support for interrupts via the `RTI` (Return from
-Interrupt) instruction. When an interrupt is serviced, the processor saves the
-current status onto the stack and jumps to the interrupt handler. `RTI`
-restores the PC from the stack when the handler returns. The ISA does not
-specify the interrupt protocol, the bus signaling, or the acknowledgment
-mechanism. These details are left to the implementation.
+LC-2 provides support for vectored interrupts. When an interrupt is serviced,
+the processor pushes the current PC and CC onto the stack, then reads an 8-bit
+value from the interrupting device, called the interrupt vector (`INTV`).
+`INTV` is zero-extended to 16 bits and used as a memory address into the
+interrupt table: the value stored at that address is loaded into the PC,
+transferring control to the interrupt handler.{{< citation-needed >}}
+
+The `RTI` (Return from Interrupt) instruction reverses this process, popping
+the PC and CC from the stack to resume the interrupted
+program.{{< citation-needed >}}
+
+Beyond this, the ISA does not specify the interrupt protocol in further detail:
+the bus signaling and acknowledgment mechanism used to deliver `INTV` are left
+to the implementation.

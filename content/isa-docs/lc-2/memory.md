@@ -24,12 +24,12 @@ system, not the ISA itself. The ISA only defines the trap vector table at
 `0x0000 - 0x00FF`. Everything else, from the location of the OS to the boundary
 of userspace, is a software convention rather than a hardware requirement.
 
-| Range               | Purpose                               |
-|:-------------------:|:-------------------------------------:|
-| `0x0000` - `0x00FF` | Trap Vector Table[^lc2-trap]          |
-| `0x0100` - `0x2FFF` | Operating System[^matt-postiff-guide] |
-| `0x3000` - `0xCFFF` | Userspace                             |
-| `0xD000` - `0xFFFF` | Device Registers                      |
+| Range               | Purpose                                                                       |
+|:-------------------:|:-----------------------------------------------------------------------------:|
+| `0x0000` - `0x00FF` | Trap Vector Table[^lc2-trap] / [Interrupt Vector Table](..#interrupt-support) |
+| `0x0100` - `0x2FFF` | Operating System[^matt-postiff-guide]                                         |
+| `0x3000` - `0xCFFF` | Userspace                                                                     |
+| `0xD000` - `0xFFFF` | Device Registers                                                              |
 
 [^lc2-trap]: {{< cite-ics edition="1" chapter="Appendix A.3 The Instruction Set" page="448" page-end="449" >}}
 [^matt-postiff-guide]: {{< cite-web
