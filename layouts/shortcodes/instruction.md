@@ -13,6 +13,11 @@ formats, encoding diagram, high-level operation, and usage examples.
 @param {string} encoding-dark  Optional dark mode variant of the encoding
                                diagram. If set, `encoding` is only shown in
                                light mode and this is shown in dark mode.
+@param {string} encoding-bits  Optional accessible bit-level breakdown of the
+                               encoding, for screen readers and crawlers. Use
+                               lines of "bits:value:meaning", one per row.
+                               Separate multiple variants with a line
+                               containing only "---".
 @param {string} operation      High-level operation, typically pseudo-C. Use a
                                backtick-quoted string for multiple lines.
 @param {string} examples       Usage examples in LC-2 assembly. Use a
@@ -54,6 +59,7 @@ result is negative, zero, or positive.
 {{- $formats      := .Get "formats" -}}
 {{- $encoding     := .Get "encoding" -}}
 {{- $encodingDark := .Get "encoding-dark" -}}
+{{- $encodingBits := .Get "encoding-bits" -}}
 {{- $operation    := .Get "operation" -}}
 {{- $examples     := .Get "examples" -}}
 {{- $description  := .Inner -}}
@@ -86,6 +92,24 @@ Sligtly edited version of Hextra's `details` shortcode
 <img src="{{ $encodingDark }}" alt="{{ $mnemonic }} instruction encoding" class="hx:hidden hx:dark:block">
 {{ else }}
 <img src="{{ $encoding }}" alt="{{ $mnemonic }} instruction encoding">
+{{ end }}
+
+{{ if $encodingBits }}
+{{ $variants := (split $encodingBits "---") }}
+{{ $html := printf "<div id=\"%s-encoding-table\" class=\"hx:sr-only\">" ($mnemonic | lower) }}
+{{ range $variantIndex, $variant := $variants }}
+  {{ $html = print $html "<table>" }}
+  {{ $html = print $html (printf "<caption>%s encoding%s</caption>" $mnemonic (cond (gt (len $variants) 1) (printf ", variant %d" (add $variantIndex 1)) "")) }}
+  {{ $html = print $html "<thead><tr><th>Bits</th><th>Value</th><th>Meaning</th></tr></thead>" }}
+  {{ $html = print $html "<tbody>" }}
+  {{ range (split (trim $variant "\n") "\n") }}
+    {{ $parts := split . "|" }}
+    {{ $html = print $html (printf "<tr><td>%s</td><td>%s</td><td>%s</td></tr>" (index $parts 0) (index $parts 1) (index $parts 2)) }}
+  {{ end }}
+  {{ $html = print $html "</tbody></table>" }}
+{{ end }}
+{{ $html = print $html "</div>" }}
+{{ $html | safeHTML }}
 {{ end }}
 
 <h4>Operation</h4>
