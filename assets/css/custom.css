@@ -1,3 +1,7 @@
 html {
   scroll-padding-top: 5rem;
 }
+
+h3.hx\:sr-only + * {
+  margin-top: 0 !important;
+}

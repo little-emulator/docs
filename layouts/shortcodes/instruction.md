@@ -58,7 +58,18 @@ result is negative, zero, or positive.
 {{- $examples     := .Get "examples" -}}
 {{- $description  := .Inner -}}
 
-### {{ $mnemonic }}
+<!--
+Sligtly edited version of Hextra's `details` shortcode
+<https://github.com/imfing/hextra/blob/main/layouts/_shortcodes/details.html>
+-->
+<details class="hx:last-of-type:mb-0 hx:rounded-lg hx:bg-neutral-50 hx:dark:bg-neutral-800 hx:p-2 hx:mt-4 hx:group">
+  <summary class="hx:flex hx:items-center hx:cursor-pointer hx:select-none hx:list-none hx:p-1 hx:rounded-sm hx:transition-colors hx:hover:bg-gray-100 hx:dark:hover:bg-neutral-800 hx:before:mr-1 hx:before:inline-block hx:before:transition-transform hx:before:content-[''] hx:dark:before:invert hx:rtl:before:rotate-180 hx:group-open:before:rotate-90">
+    <strong class="hx:text-xl">{{ $mnemonic }}</strong>
+  </summary>
+  <div class="hx:p-2 hx:overflow-hidden">
+
+<!-- Hidden heading: For TOC entry and permalink only -->
+### {{ $mnemonic }} {.hx:sr-only}
 
 > {{ $short }}
 
@@ -92,3 +103,6 @@ result is negative, zero, or positive.
 ```
 {{ $examples }}
 ```
+
+  </div>
+</details>
